@@ -41,6 +41,13 @@ case 'VOICE_STATE_UPDATE':
 + MESSAGE_REACTION_ADD
 ```
 
+## TO DO LIST:
+- [] Code Beautify
+- [] Adding more features (feel free to suggest them by opening a new issue and tagging it as suggestion)
+
 ## Notes:
 **This works almost just like Discord.js except it looks more complicated and messy. It will be optimized and will look simpler in the future, but for now, it is what it is:)**
+
+## Developers & Contributors:
+**😎 | discord-ws Developer:** [Edwin Ng](https://notedwin.co)
 

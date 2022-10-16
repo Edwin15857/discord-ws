@@ -2,7 +2,6 @@
 **Easily establish connections to Discord gateways without worrying about making your own event triggers!**
 
 ## Setting Up
-****
 1. Create a .env file to your project with the following content.
 ```
 BOT_TOKEN="YOUR_BOT_TOKEN_HERE"
@@ -19,7 +18,16 @@ const client = new Discord.Client({
 });
 ```
 
-3. On line 59 - 75 is where you can receive event triggers. Make sure you have the correct intents. Else certain events wont be emitted to you. You can add more events if you need it. Here is the [list of gateway events that are available to be received.](https://discord.com/developers/docs/topics/gateway-events#receive-events)
+3. On line 59 - 75 is where you can receive event triggers. Make sure you have the correct intents. Else certain events wont be emitted to you. You can add more events if you need it. Here is the [list of gateway events that are available to be received.](https://discord.com/developers/docs/topics/gateway-events#receive-events) Example:
+```js
+...
+case 'MESSAGE_DELETE':
+    console.log(d);
+    break;
+case 'VOICE_STATE_UPDATE':
+    console.log(d);
+    break
+```
 
 4. All the events have to be in upper case. Replace spaces with underscores. Example:
 ```diff

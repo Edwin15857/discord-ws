@@ -1,5 +1,4 @@
 const WebSocket = require("ws");
-const config = require("./config.json");
 const { opCode, properties, intents } = require("./Utils/Constants.js");
 const IntentsCalculator = require("./Utils/IntentsCalculator.js");
 
@@ -15,7 +14,7 @@ let server = "wss://gateway.discord.gg/?v=6&encoding=json";
 const ws = new WebSocket(server);
 
 /* Setting the token to the token in the config.json file. */
-token = config.BOT_TOKEN;
+token = process.env.BOT_TOKEN;
 
 /* Calculates the intents of the bot. */
 const myIntents = IntentsCalculator.Calculate([intents.GUILD_MESSAGES, intents.MESSAGE_CONTENT, intents.DIRECT_MESSAGES]);

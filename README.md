@@ -49,6 +49,6 @@ case 'VOICE_STATE_UPDATE':
 **This works almost just like Discord.js except it looks more complicated and messy. It will be optimized and will look simpler in the future, but for now, it is what it is:)**
 
 ## discord-ws Developer:
-[Edwin Ng](https://notedwin.co)
-Dev Channel: ![![YouTube Subscribe](https://user-images.githubusercontent.com/54582223/196049569-e6463ba9-62ec-42a6-952e-054ad20c5bbc.png)](https://link.notedwin.co/tutorials-youtube)
-
+- **Edwin Ng:**
+    - 💻Portfolio Website: https://notedwin.co
+    - 🎥Dev YouTube Channel: https://link.notedwin.co/tutorials-youtube

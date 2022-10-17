@@ -1,6 +1,7 @@
 const WebSocket = require("ws");
 const { opCode, properties, intents } = require("./Utils/Constants.js");
 const IntentsCalculator = require("./Utils/IntentsCalculator.js");
+require('dotenv').config();
 
 /* A function that is called immediately after it is defined. It is used to keep the runtime environment alive. */
 (function keepalive() {
@@ -15,6 +16,7 @@ const ws = new WebSocket(server);
 
 /* Setting the token to the token in the config.json file. */
 token = process.env.BOT_TOKEN;
+console.log(token)
 
 /* Calculates the intents of the bot. */
 const myIntents = IntentsCalculator.Calculate([intents.GUILD_MESSAGES, intents.MESSAGE_CONTENT, intents.DIRECT_MESSAGES]);
@@ -87,7 +89,7 @@ function heartbeat(interval) {
 
 /**
  * It sends a message to the Discord API to identify the bot
- * @param [token] - The token of the bot.
+ * @param {string} token - The token of the bot.
  */
 function identify(token = '') {
     ws.send(JSON.stringify({ op: opCode.IDENTIFY, d: { token, intents: myIntents, properties } }))

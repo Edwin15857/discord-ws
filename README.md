@@ -11,7 +11,7 @@ BOT_TOKEN="YOUR_BOT_TOKEN_HERE"
 /* Calculates the intents of the bot. */
 const myIntents = IntentsCalculator.Calculate([intents.GUILD_MESSAGES, intents.MESSAGE_CONTENT, intents.DIRECT_MESSAGES]);
 ```
-which is actually quite similar to how Discord.js receives intents.
+which is actually quite similar to how Discord.js receives intents and calculate them.
 ```js
 const client = new Discord.Client({
 	intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.GUILD_VOICE_STATES, Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_MESSAGES, Discord.Intents.FLAGS.DIRECT_MESSAGES]

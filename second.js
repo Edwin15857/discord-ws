@@ -1,5 +1,5 @@
 const WebSocket = require("ws");
-require("dotenv").config();
+const config = require("./config.json");
 const { opCode, properties, intents } = require("./Utils/Constants.js");
 const IntentsCalculator = require("./Utils/IntentsCalculator.js");
 
@@ -15,8 +15,7 @@ let server = "wss://gateway.discord.gg/?v=6&encoding=json";
 const ws = new WebSocket(server);
 
 /* Setting the token to the token in the config.json file. */
-token = process.env.BOT_TOKEN;
-console.log(token)
+token = config.BOT_TOKEN;
 
 /* Calculates the intents of the bot. */
 const myIntents = IntentsCalculator.Calculate([intents.GUILD_MESSAGES, intents.MESSAGE_CONTENT, intents.DIRECT_MESSAGES]);
@@ -25,11 +24,8 @@ const myIntents = IntentsCalculator.Calculate([intents.GUILD_MESSAGES, intents.M
 ws.on('open', function open() {
     console.log('Connected to Discord Gateway:)')
     /* Sending the identify payload to the Discord API. */
+    identify(token);
 })
-
-ws.on('error', function incoming(data) {
-    console.log("Error:", data);
-});
 
 /* Listening for a message from the Discord API. */
 ws.on('message', function incoming(data) {
@@ -56,7 +52,7 @@ ws.on('message', function incoming(data) {
             break;
         case opCode.INVALID_SESSION:
             console.log("op code 9: invalid session. Failure response to Identify or Resume or invalid active session");
-            reconnect();
+            reconnect(token);
             break;
     }
 
@@ -65,13 +61,7 @@ ws.on('message', function incoming(data) {
         case 'MESSAGE_CREATE':
             let author = d.author;
             let content = d.content;
-            if (author.bot === true) {
-                console.log(`message is sent by a bot.`)
-                break;
-            } else {
-                console.log(`Event:`, d)
-                console.log(`${author.username} said ${content}`);
-            }
+            console.log(`${author.username} said ${content}`);
             break;
 
         case 'GUILD_CREATE':
@@ -88,7 +78,7 @@ ws.on('message', function incoming(data) {
 
 /**
  * It sends a heartbeat to the server every interval
- * @param {number} interval - The interval in milliseconds to send the heartbeat.
+ * @param interval - The interval in milliseconds to send the heartbeat.
  */
 function heartbeat(interval) {
     setInterval(() => {
@@ -98,15 +88,15 @@ function heartbeat(interval) {
 
 /**
  * It sends a message to the Discord API to identify the bot
- * @param {string} token - The token of the bot.
+ * @param [token] - The token of the bot.
  */
-function identify(token) {
+function identify(token = '') {
     ws.send(JSON.stringify({ op: opCode.IDENTIFY, d: { token, intents: myIntents, properties } }))
 }
 
 /**
  * It will attempt to reconnect to Discord every 3 seconds.
- * @param {string} botToken - The token of the bot you want to use.
+ * @param botToken - The token of the bot you want to use.
  */
 async function reconnect(botToken) {
     setInterval(() => {
